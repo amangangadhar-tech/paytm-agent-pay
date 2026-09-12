@@ -1,0 +1,12 @@
+{
+  "base": "https://app.phinite.ai/api/v1/ai",
+  "integrationId": "PASTE_INTEGRATION_ID",
+  "env": "dev",
+  "apiKey": "PASTE_WORKSPACE_TOKEN",
+  "twilio": {
+    "accountSid": "AC_PASTE",
+    "authToken": "PASTE",
+    "from": "+1XXXXXXXXXX",
+    "to": "+91XXXXXXXXXX"
+  }
+}

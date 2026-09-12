@@ -1,0 +1,221 @@
+# Phinite Docs
+
+- [About Phinite](https://docs.phinite.ai/getting-started/about-phinite.md): Agent-first platform to design, build, and deploy Conversational and Autonomous Agent Graphs.
+- [What you can build](https://docs.phinite.ai/getting-started/what-you-can-build.md): Explore what you can build on Phinite — Conversational and Autonomous Agent Graphs across channels and automation.
+- [Quickstart](https://docs.phinite.ai/getting-started/quickstart.md): Empty workspace to a deployable Agent Graph build.
+- [Workspace overview](https://docs.phinite.ai/workspaces/workspace-overview.md): How workspaces organize Agent Graphs, tools, integrations, and team collaboration in Phinite.
+- [Agents overview](https://docs.phinite.ai/agents/overview.md): Conversational vs Autonomous Agent Graphs — create, design, build, and deploy.
+- [Conversational Agent Graphs](https://docs.phinite.ai/agents/conversational.md): Design chat and voice Agent Graphs — deploy via channels or Chat API.
+- [Autonomous Agent Graphs](https://docs.phinite.ai/agents/autonomous.md): Schedule or trigger background Agent Graphs — API webhooks, cron jobs, and event-driven automation.
+- [Graph Studio overview](https://docs.phinite.ai/graph-studio/overview.md): Open Graph Studio, studio layout, graph assets, and the design golden path.
+- [Graph creation methods](https://docs.phinite.ai/graph-studio/methods.md): Build Agent Graphs with Phinite Aura or the manual canvas.
+- [Interface layout](https://docs.phinite.ai/graph-studio/interface.md): Canvas, toolbar, node drawer, graph-level sidebar assets, variables, and RAG in Graph Studio.
+- [Node library](https://docs.phinite.ai/graph-studio/interface/node-library.md): Floating palette, node types, node anatomy, and Master/Child agent drawer configuration.
+- [Connections and logic](https://docs.phinite.ai/graph-studio/connections.md): Handles, edges, and conditional branches on the Agent Graph canvas.
+- [Agent Graph publishing and versions](https://docs.phinite.ai/graph-studio/publishing.md): Save graph drafts, create builds in Build Agent, and manage versions before deploy.
+- [Interface layout](https://docs.phinite.ai/graph-studio/interface.md): Canvas, toolbar, node drawer, graph-level sidebar assets, variables, and RAG in Graph Studio.
+- [Node library](https://docs.phinite.ai/graph-studio/interface/node-library.md): Floating palette, node types, node anatomy, and Master/Child agent drawer configuration.
+- [Types of session variables](https://docs.phinite.ai/graph-studio/types-of-session-variables.md): Capture, tool-returned, user, system, and predefined-tool session variables.
+- [Input variables in agent nodes](https://docs.phinite.ai/graph-studio/input-variables-in-agent-node.md): Restrict which session variables an agent node can read during a run.
+- [Capture Variables in Agent Node](https://docs.phinite.ai/graph-studio/capture-variables-in-agent-node.md)
+- [Connections and logic](https://docs.phinite.ai/graph-studio/connections.md): Handles, edges, and conditional branches on the Agent Graph canvas.
+- [RAG Collections overview](https://docs.phinite.ai/rag/overview.md): Workspace knowledge collections for retrieval — create, chunk, and attach to agent nodes.
+- [RAG connectors](https://docs.phinite.ai/rag/connectors.md): Add files, websites, wikis, and synced folders to a RAG collection.
+- [Attach RAG collections to nodes](https://docs.phinite.ai/rag/attach-to-nodes.md): Ground Master and Child Agent nodes in workspace collections with threshold and top k.
+- [Tools & Dev Studio overview](https://docs.phinite.ai/devstudio/overview.md): Workspace tools hub — types, workflow, test, publish, and observability.
+- [Tool authoring methods](https://docs.phinite.ai/devstudio/methods.md): Build custom tools with Dev Studio Copilot or manual Python.
+- [Custom tools](https://docs.phinite.ai/devstudio/custom-tools.md): Tool structure, test, publish, and attach to Agent Graph nodes.
+- [Predefined tools](https://docs.phinite.ai/devstudio/prebuilt-tools.md): Connect third-party APIs once, enable subtools on Agent Graph nodes — full catalog in Integrations Hub.
+- [Env. variables](https://docs.phinite.ai/configure/env-variables.md): DEV, UAT, and PROD environment variables for builds and integrations.
+- [Configuration overview](https://docs.phinite.ai/configure/overview.md): All configuration layers — node, environment, integrations, and build export.
+- [Env. variables](https://docs.phinite.ai/configure/env-variables.md): DEV, UAT, and PROD environment variables for builds and integrations.
+- [Integrations configuration](https://docs.phinite.ai/configure/integrations.md): Channels, Integration Tools, and Triggers in the workspace hub and Graph Studio.
+- [Build export configuration](https://docs.phinite.ai/configure/build-export.md): Export tools, MCP, and env variables into builds and Agent Card versions.
+- [Models](https://docs.phinite.ai/workspace/models.md): Models hub — Custom Models (BYOM) and Model Keys (BYOK) for agent nodes.
+- [Custom Models](https://docs.phinite.ai/workspace/custom-models.md): Bring your own model (BYOM) endpoints for Graph Studio orchestration.
+- [Builds & environments overview](https://docs.phinite.ai/builds/overview.md): Freeze Agent Graphs and tool versions into immutable builds, then assign to DEV, UAT, or PROD.
+- [Build lifecycle](https://docs.phinite.ai/builds/lifecycle.md): From saved Agent Graph to deployed Agent Build across DEV, UAT, and PROD.
+- [Publishing Agent Graphs & tools](https://docs.phinite.ai/builds/publishing.md): Publish tool versions and promote Agent Builds safely across environments.
+- [Build configuration](https://docs.phinite.ai/builds/configuration.md): Pin graph and tool versions, export integrations, and set environment-specific options.
+- [Build environments](https://docs.phinite.ai/builds/environments.md): DEV, UAT, and PROD — assign Agent Builds and scope env variables.
+- [Deploy](https://docs.phinite.ai/agents/deploy.md): Deploy an Agent Build to a channel, Chat API, HTTP trigger, cron, or A2A.
+- [Deploy to a channel](https://docs.phinite.ai/agents/deploy-channel.md): Assign an Agent Build to a channel environment for Conversational Agent Graphs.
+- [Deploy a trigger](https://docs.phinite.ai/agents/deploy-trigger.md): Run Autonomous Agent Graphs via API webhook, Cron, or background task.
+- [Channels & Integrations overview](https://docs.phinite.ai/channels/overview.md): Connect Conversational Agent Graphs to chat, voice, and email channels.
+- [Supported channels](https://docs.phinite.ai/channels/supported.md): Messaging and voice channels for Conversational Agent Graphs.
+- [Web Chat](https://docs.phinite.ai/channels/webchat.md): Embed web chat and configure appearance for a Conversational Agent Graph.
+- [WhatsApp](https://docs.phinite.ai/channels/whatsapp.md): Connect WhatsApp Business API for Conversational Agent Graphs.
+- [Slack](https://docs.phinite.ai/channels/slack.md): Connect Slack as a channel for Conversational Agent Graphs.
+- [Microsoft Teams](https://docs.phinite.ai/channels/teams.md): Connect Microsoft Teams for Conversational Agent Graphs.
+- [Slack & Microsoft Teams](https://docs.phinite.ai/channels/slack-teams.md): Combined setup reference for Slack and Teams channels with Conversational Agent Graphs.
+- [Twilio Voice](https://docs.phinite.ai/channels/twilio.md): Connect Twilio for voice channels with Conversational Agent Graphs.
+- [Email](https://docs.phinite.ai/channels/email.md): Configure email as a channel for Conversational Agent Graphs.
+- [Triggers & automation overview](https://docs.phinite.ai/triggers-intents/overview.md): Conversational vs Autonomous ingress — channels, Chat API, webhooks, and cron.
+- [Trigger APIs](https://docs.phinite.ai/triggers-intents/trigger-apis.md): Autonomous trigger execution modes — API, background task, and cron.
+- [API usage examples](https://docs.phinite.ai/triggers-intents/api-usage-examples.md): Sample requests to invoke Autonomous Agent Graph triggers with Bearer auth.
+- [Event-based triggers](https://docs.phinite.ai/triggers-intents/event-triggers.md): Cron schedules and email-driven automation for Autonomous Agent Graphs.
+- [Mapping triggers to workflows](https://docs.phinite.ai/triggers-intents/mapping.md): Assign triggers to Agent Builds and validate runs per environment.
+- [Observability overview](https://docs.phinite.ai/observability/overview.md): Insights and Sessions for Agent Graph runs.
+- [Insights and Sessions](https://docs.phinite.ai/observability/insights.md): Observability KPIs, Cost (Phinite), and the Sessions list.
+- [Governance overview](https://docs.phinite.ai/governance/overview.md): Workspace policies and Studio Tool / HITL controls for Agent Graphs (Pro+).
+- [Tool policies](https://docs.phinite.ai/governance/tool-policies.md): Create and attach Tool Governance policies — Details, Tools, Actions, Sandbox, Review.
+- [Human in the Loop](https://docs.phinite.ai/governance/hitl.md): HITL policies, HIL New destination profiles, and how they connect to Tool Governance.
+- [Approvals](https://docs.phinite.ai/governance/approvals.md): Accept or Reject human-approval tool calls from workspace Approvals or Studio HIL Approvals.
+- [Governance setup](https://docs.phinite.ai/governance/setup.md): End-to-end — create a tool policy, attach it, set approval delivery, and triage approvals.
+- [Guardrails overview](https://docs.phinite.ai/guardrails/overview.md): LLM safety — Studio LLM Governance and workspace Guardrails analytics.
+- [Phinite Guardrails](https://docs.phinite.ai/guardrails/phinite.md): Built-in Control library — Before the model, After the model, Session data.
+- [Guardrail profiles](https://docs.phinite.ai/guardrails/profiles.md): Create profiles for Phinite, AWS Bedrock, Azure Content Safety, and GCP Model Armor.
+- [Attach guardrails](https://docs.phinite.ai/guardrails/attach.md): Bind guardrail profiles to an entire flow or one agent in Studio LLM Governance.
+- [Guardrails setup](https://docs.phinite.ai/guardrails/setup.md): End-to-end — create a profile (Phinite or cloud), attach it, verify In Use.
+- [Evaluations overview](https://docs.phinite.ai/evaluations/overview.md): Workspace Analytics and History / Sessions for agent evaluation runs (Pro+).
+- [Studio evaluations](https://docs.phinite.ai/evaluations/studio.md): Agent Evaluations panel — entry points and permissions.
+- [Connect to Build](https://docs.phinite.ai/evaluations/connect-to-build.md): Attach evaluation metrics to a build for live or scheduled scoring.
+- [Run on draft](https://docs.phinite.ai/evaluations/run-on-draft.md): Launch evaluations on the current flow version — Simulation, Autonomous, or Production.
+- [Evaluations setup](https://docs.phinite.ai/evaluations/setup.md): End-to-end — Run on draft or Connect to Build, then read Analytics and History.
+- [User Management](https://docs.phinite.ai/user-management/user-management.md): Invite users, assign workspace roles, and manage access from the workspace Users page.
+- [Workspace Users page](https://docs.phinite.ai/user-management/workspace-ui.md): Open the Users screen, see who can do what, and use invites, roles, and member actions.
+- [Inviting & Managing Users](https://docs.phinite.ai/user-management/inviting-users.md): Invite collaborators from the workspace Users page, assign roles, and manage access over time.
+- [Access Controls & Security](https://docs.phinite.ai/user-management/access-controls.md): How workspace RBAC and sign-in protect your organization's Agent Graph work.
+- [User Roles & Permissions](https://docs.phinite.ai/user-management/user-roles.md): Understand workspace RBAC capabilities by role across Phinite.
+- [Glossary](https://docs.phinite.ai/reference/glossary-v2.md): Current Phinite terms for the agent-first product model.
+- [Keyboard Shortcuts](https://docs.phinite.ai/reference/shortcuts.md): Productivity shortcuts for Graph Studio and Dev Studio.
+- [FAQs](https://docs.phinite.ai/reference/faqs.md): Frequently asked questions about Phinite Agent Graphs, tools, and workspace access.
+- [API Reference](https://docs.phinite.ai/reference/api.md): Authenticate and call Phinite APIs to trigger Agent Graph runs and automations.
+- [Release Notes](https://docs.phinite.ai/reference/release-notes.md): Changes, improvements, and fixes across Phinite versions.
+- [Error Codes & Logs](https://docs.phinite.ai/support/error-codes.md): Common error patterns, where to find logs, and how to resolve Agent Graph failures.
+- [Common Build Failures](https://docs.phinite.ai/support/build-failures.md): Diagnose and fix common Agent Graph build failures.
+- [Environment Misconfigurations](https://docs.phinite.ai/support/env-issues.md): Find and fix environment-specific configuration issues for Agent Graph deploys.
+- [Contacting Support](https://docs.phinite.ai/support/contact.md): How to report Agent Graph, tool, and deploy issues and get help.
+- [Agent Registry overview](https://docs.phinite.ai/agent-registry/overview.md): Publish Agent Graphs as discoverable A2A agents, browse the registry, and compose multi-agent workflows with Browse and Discovery modes.
+- [Invoke A2A agents from Claude](https://docs.phinite.ai/agent-registry/invoke-a2a-from-claude.md): Install the Phinite Connector plugin and call Agent Registry agents from Claude.
+- [Expose your Agent Graph as an A2A agent](https://docs.phinite.ai/agent-registry/expose-your-flow.md): Register a published Agent Build in the Agent Registry using Deploy as A2A and attach an Agent Card.
+- [Registry agent nodes (Browse & Discovery)](https://docs.phinite.ai/agent-registry/registry-agent-nodes.md): Attach Agent Registry agents to a master agent node in Browse mode or let Discovery auto-select by filters.
+- [Browse the Agent Registry](https://docs.phinite.ai/agent-registry/catalog.md): Search, filter, and inspect organisation and public A2A agents in the workspace catalog.
+- [Agent Cards & builds](https://docs.phinite.ai/agent-registry/agent-cards.md): Manage A2A registry builds per Agent Graph, compare TEST and LIVE deployments, and promote to production.
+- [A2A endpoints & lifecycle](https://docs.phinite.ai/agent-registry/endpoints-and-lifecycle.md): Hosted URL patterns, TEST vs LIVE builds, promotion, authentication, and registry API endpoints.
+- [Agent Registry glossary](https://docs.phinite.ai/agent-registry/glossary.md): Industry and A2A terminology mapped to Phinite UI labels, API fields, and MIME modes.
+- [Integrations Hub](https://docs.phinite.ai/integrations-hub/overview.md): Connect channels and predefined tools for Conversational and Autonomous Agent Graphs.
+- [Email](https://docs.phinite.ai/channels/email.md): Configure email as a channel for Conversational Agent Graphs.
+- [Chat (AI)](https://docs.phinite.ai/integrations-hub/chat-ai.md): AI chat actions and conversational AI integration.
+- [Slack](https://docs.phinite.ai/channels/slack.md): Connect Slack as a channel for Conversational Agent Graphs.
+- [Microsoft Teams](https://docs.phinite.ai/channels/teams.md): Connect Microsoft Teams for Conversational Agent Graphs.
+- [Twilio Voice](https://docs.phinite.ai/channels/twilio.md): Connect Twilio for voice channels with Conversational Agent Graphs.
+- [WhatsApp](https://docs.phinite.ai/channels/whatsapp.md): Connect WhatsApp Business API for Conversational Agent Graphs.
+- [Apollo.io](https://docs.phinite.ai/integrations-hub/apollo-io.md): Enrich people and organizations, search prospects, and manage accounts, contacts, and deals via the Apollo.io API.
+- [Close CRM](https://docs.phinite.ai/integrations-hub/close-crm.md): Manage a Close CRM account — leads, contacts, opportunities, tasks, and activities (notes, calls, emails, SMS, meetings), plus statuses, users, custom fields, pipelines, and smart views — via the Close REST API.
+- [Copper CRM](https://docs.phinite.ai/integrations-hub/copper-crm.md): Manage a Copper CRM account — people, companies, leads, opportunities, tasks, projects, activities, plus account/config lookups — via the Copper REST API.
+- [Freshsales CRM](https://docs.phinite.ai/integrations-hub/freshsales.md): Manage Freshsales CRM contacts, accounts, deals, notes, tasks, and perform search via the Freshsales REST API.
+- [HubSpot CRM](https://docs.phinite.ai/integrations-hub/hubspot-crm.md): Create, read, update, delete, and search HubSpot CRM records (contacts, companies, deals, tickets) and retrieve object properties.
+- [Insightly](https://docs.phinite.ai/integrations-hub/insightly.md): Manage Insightly CRM records — contacts, organisations, leads, opportunities, projects, tasks, and events — via the Insightly REST API v3.1.
+- [Microsoft Dynamics 365](https://docs.phinite.ai/integrations-hub/microsoft-dynamics-365.md): Manage Microsoft Dynamics 365 Business Central companies, customers, vendors, items, sales/purchase invoices, sales orders, employees, and general ledger entries via the Business Central API v2.0.
+- [Outreach](https://docs.phinite.ai/integrations-hub/outreach.md): Manage Outreach.io sales-engagement resources — prospects, accounts, sequences, sequence enrollments, mailboxes, tasks, calls, and users — via the Outreach REST API.
+- [Pipedrive](https://docs.phinite.ai/integrations-hub/pipedrive.md): Manage Pipedrive CRM deals, persons, organizations, activities, notes, pipelines, leads, products, and deal-products via the Pipedrive REST API.
+- [Salesforce](https://docs.phinite.ai/integrations-hub/salesforce.md): Connect Salesforce to create and update leads, accounts, and opportunities,
+- [Salesloft](https://docs.phinite.ai/integrations-hub/salesloft.md): Manage Salesloft sales-engagement data — people, accounts, cadences and memberships, users, notes, tasks, calls, email templates, email activity, successes, and stages — via the Salesloft v2 API.
+- [ActiveCampaign](https://docs.phinite.ai/integrations-hub/activecampaign.md): Manage an ActiveCampaign account — contacts, tags, lists, deals, accounts, plus contact-tag/list associations and custom fields via the ActiveCampaign v3 API.
+- [Customer.io](https://docs.phinite.ai/integrations-hub/customer-io.md): Manage Customer.io people, events, devices, segments, campaigns, transactional messages, and message history via the Track and App APIs.
+- [Instagram](https://docs.phinite.ai/integrations-hub/instagram.md): Manage an Instagram Business or Creator account — profile, media publishing, comments, insights, hashtags, stories, and business discovery via the Instagram Graph API.
+- [SendGrid](https://docs.phinite.ai/integrations-hub/sendgrid.md): Send emails, manage contacts and lists, create single sends, retrieve templates, handle suppressions, and view stats via the SendGrid API.
+- [Front](https://docs.phinite.ai/integrations-hub/front.md): Manage Front shared-inbox communication — conversations, messages and replies, contacts, inboxes, channels, teammates, tags, comments, and drafts — via the Front Core API.
+- [Gorgias](https://docs.phinite.ai/integrations-hub/gorgias.md): Manage Gorgias helpdesk resources — tickets, ticket messages, customers, users, tags, and views — via the Gorgias REST API.
+- [Help Scout](https://docs.phinite.ai/integrations-hub/helpscout.md): Manage Help Scout Mailbox support resources — conversations, threads, customers, mailboxes, users, and tags — via the Help Scout Mailbox API v2. Authenticate with an access token, or client_id + client_secret.
+- [Intercom](https://docs.phinite.ai/integrations-hub/intercom.md): Manage Intercom contacts, companies, conversations, notes, tags, admins, and help-center articles via the Intercom REST API.
+- [Kustomer](https://docs.phinite.ai/integrations-hub/kustomer.md): Manage a Kustomer account — customers, conversations, messages, notes, tasks, companies, tags, teams, users, and shortcuts — via the Kustomer API v1.
+- [Zoho Desk](https://docs.phinite.ai/integrations-hub/zoho-desk.md): Manage Zoho Desk help-desk tickets, comments, contacts, accounts, agents, departments, and knowledge-base articles via the Zoho Desk REST API.
+- [Google Calendar](https://docs.phinite.ai/integrations-hub/google-calendar.md): Create, update, and query events, check availability, send invites,
+- [Google Drive](https://docs.phinite.ai/integrations-hub/google-drive.md): Upload, download, search, and share files, manage folders and permissions,
+- [Google Sheets](https://docs.phinite.ai/integrations-hub/google-sheets.md): Read, write, and append spreadsheet rows, format ranges, and automate
+- [Notion](https://docs.phinite.ai/integrations-hub/notion.md): Read and update Notion pages and databases, search content, append
+- [Zoho Office Integrator](https://docs.phinite.ai/integrations-hub/zoho-office-integrator.md): Create, edit, preview, convert, and compare documents, spreadsheets, and presentations via Zoho Office Integrator.
+- [Amplitude](https://docs.phinite.ai/integrations-hub/amplitude.md): Manage Amplitude event tracking, analytics queries, taxonomy, cohorts, and user lookups via the Amplitude REST APIs.
+- [Google BigQuery](https://docs.phinite.ai/integrations-hub/google-bigquery.md): Query BigQuery datasets with SQL, inspect tables, export results, and
+- [Looker](https://docs.phinite.ai/integrations-hub/looker.md): Query Looker data, manage Looks, dashboards, folders, users, and scheduled plans on a Looker BI instance via the Looker REST API.
+- [Mixpanel](https://docs.phinite.ai/integrations-hub/mixpanel.md): Manage Mixpanel event tracking, identity, user/group profiles, analytics queries, cohorts, annotations, and lookup tables via the Mixpanel APIs.
+- [Power BI](https://docs.phinite.ai/integrations-hub/power-bi.md): Manage Power BI datasets, reports, dashboards, workspaces (groups), dataflows, and gateways via the Power BI REST API.
+- [Tableau](https://docs.phinite.ai/integrations-hub/tableau.md): Manage Tableau workbooks, datasources, views, users, groups, and projects via the Tableau REST API.
+- [Azure Blob Storage](https://docs.phinite.ai/integrations-hub/azure-blob.md): Manage Azure Blob Storage containers and blobs via the Azure Blob Storage REST API.
+- [Azure Cosmos DB](https://docs.phinite.ai/integrations-hub/azure-cosmos-db.md): Manage Azure Cosmos DB containers and items (documents) via the Cosmos DB REST API.
+- [MongoDB](https://docs.phinite.ai/integrations-hub/mongodb.md): Perform CRUD and aggregations on MongoDB collections, manage indexes,
+- [MySQL](https://docs.phinite.ai/integrations-hub/mysql.md): Execute queries, manage tables and schema, and perform CRUD operations on a MySQL database via async connection.
+- [Redis](https://docs.phinite.ai/integrations-hub/redis.md): Run Redis operations — strings, hashes, lists, sets, sorted sets, pub/sub, TTL management, and server info via the Redis protocol.
+- [Azure](https://docs.phinite.ai/integrations-hub/azure.md): Manage Azure resources via the Azure Resource Manager REST API — subscriptions, resource groups, virtual machines, storage accounts, and App Services.
+- [Docker](https://docs.phinite.ai/integrations-hub/docker.md): Manage Docker containers, images, networks, and volumes on a remote Docker daemon via the Docker Engine REST API.
+- [GitHub](https://docs.phinite.ai/integrations-hub/github.md): 'Manage repositories, issues, and pull requests: create tickets, comment,
+- [Google Cloud](https://docs.phinite.ai/integrations-hub/google-cloud.md): Manage Google Cloud Platform resources — Compute Engine VMs, Cloud Storage buckets and objects, Cloud SQL instances, Pub/Sub topics, and Firestore documents via GCP REST APIs.
+- [Jira](https://docs.phinite.ai/integrations-hub/jira.md): Create, search, update, and transition Jira issues, add comments, and
+- [ServiceNow](https://docs.phinite.ai/integrations-hub/servicenow.md): Manage ServiceNow incidents, change requests, problems, users, knowledge articles, CMDB CIs, and any table record via the Table and Aggregate APIs.
+- [Auth0](https://docs.phinite.ai/integrations-hub/auth0.md): Manage an Auth0 tenant via the Management API v2 — users, roles, user blocks, applications, connections, organizations, logs, and verification tickets.
+- [Okta](https://docs.phinite.ai/integrations-hub/okta.md): Manage Okta users, groups, applications, user lifecycle, and system log events via the Okta Management API.
+- [Braintree](https://docs.phinite.ai/integrations-hub/braintree.md): Interact with the Braintree (PayPal) GraphQL API — run GraphQL queries/mutations plus convenience operations for transactions and customers.
+- [Chargebee](https://docs.phinite.ai/integrations-hub/chargebee.md): Manage Chargebee billing — customers, subscriptions, invoices, transactions, credit notes, and the product catalog (items / item prices) — via the Chargebee API v2.
+- [PayPal](https://docs.phinite.ai/integrations-hub/paypal.md): Manage PayPal operations — orders, payouts, invoices, products, billing plans, and subscriptions via the PayPal REST API.
+- [Razorpay](https://docs.phinite.ai/integrations-hub/razorpay.md): Manage Razorpay orders, payments, refunds, customers, items, and settlements via the Razorpay REST API.
+- [Recurly](https://docs.phinite.ai/integrations-hub/recurly.md): Manage a Recurly subscription-billing site — accounts, subscriptions, plans, invoices, transactions, and coupons — via the Recurly v3 API.
+- [Square](https://docs.phinite.ai/integrations-hub/square.md): Manage Square payments, refunds, orders, catalog, customers, cards, invoices, payment links, subscriptions, inventory, and locations via the Square API.
+- [ShipStation](https://docs.phinite.ai/integrations-hub/shipstation.md): Manage ShipStation shipping and fulfillment — orders, shipments and labels, carriers, products, customers, warehouses, stores, and fulfillments via the ShipStation V1 API.
+- [Shopify](https://docs.phinite.ai/integrations-hub/shopify.md): Manage a Shopify store — create, update, and retrieve products, orders, and customers via the Shopify Admin REST API.
+- [Workday HCM](https://docs.phinite.ai/integrations-hub/workday-hcm.md): Access Workday HCM data — workers, organizations, job profiles, positions, locations, time off, and business titles via the Workday REST API.
+- [Tally](https://docs.phinite.ai/integrations-hub/tally.md): Manage Tally forms, submissions, webhooks, workspaces, and organization members via the Tally REST API.
+- [API](https://docs.phinite.ai/integrations-hub/api.md): Connect any REST API with configurable auth, headers, and retries,
+- [Brave Search](https://docs.phinite.ai/integrations-hub/brave-search.md): Run privacy-first web, news, and image searches with rich snippets,
+- [Firecrawl](https://docs.phinite.ai/integrations-hub/firecrawl.md): Scrape pages into clean markdown, crawl domains, extract structured
+- [MCP Client](https://docs.phinite.ai/integrations-hub/mcp-client-tool.md): Dynamically proxy any tool exposed by a remote MCP server over SSE or Streamable HTTP transport with optional authentication.
+- [Agent Card identity](https://docs.phinite.ai/a2a/agent-card-identity.md): TEST and LIVE Agent Card versions for A2A exposure.
+- [A2A discovery](https://docs.phinite.ai/a2a/discovery.md): Browse and Discovery modes for registry agents on the canvas.
+- [A2A endpoints](https://docs.phinite.ai/a2a/endpoints.md): Hosted URLs, TEST vs LIVE, and endpoint lifecycle.
+- [Agent Registry](https://docs.phinite.ai/a2a/registry.md): Search, filter, and inspect exposed A2A agents in the workspace catalog.
+- [Builds](https://docs.phinite.ai/agents/builds.md): Summary — freeze an Agent Graph and tool versions into a deployable Agent Build.
+- [Environments](https://docs.phinite.ai/agents/environments.md): Quick reference — DEV, UAT, and PROD for Agent Builds and env variables.
+- [Expose as A2A](https://docs.phinite.ai/agents/expose-a2a.md): Quick reference — publish an Agent Card and hosted A2A URL from an Agent Build.
+- [Autonomous Assistants (RPA)](https://docs.phinite.ai/assistants/autonomous.md): Schedule or trigger background automations driven by flows.
+- [Assistant Components](https://docs.phinite.ai/assistants/components.md): Agent Graphs, Intents, Tools, Builds, Triggers, Environments, and Channels.
+- [Builds](https://docs.phinite.ai/assistants/components/builds.md): Versioned artifacts for assistants and flows across environments.
+- [Channels](https://docs.phinite.ai/assistants/components/channels.md): Where assistants interact: web, messaging, voice, and email.
+- [Environments](https://docs.phinite.ai/assistants/components/environments.md): Dev, UAT, and Production environments for deployments.
+- [Agent Graphs](https://docs.phinite.ai/assistants/components/flows.md): The orchestration layer powering assistants with logic, agents, and tools.
+- [Intents (Conversational Assistant)](https://docs.phinite.ai/assistants/components/intents.md): Define and manage the actions your assistant understands and responds to.
+- [Intents (Email Assistants)](https://docs.phinite.ai/assistants/components/intents-email.md): Very similar to Conversational Intents, but differs in a few key logics.
+- [Tools](https://docs.phinite.ai/assistants/components/tools.md): External actions your assistants can call to get work done.
+- [Triggers (Autonomous Assistants)](https://docs.phinite.ai/assistants/components/triggers.md): Configure triggers to start flows automatically or from external systems.
+- [Conversational Assistants (Voice & Chat)](https://docs.phinite.ai/assistants/conversational.md): Design chat and voice assistants using flows and intents across channels.
+- [Email Assistants (Inbox Automation)](https://docs.phinite.ai/assistants/email.md): Automate email triage and replies with flows and tools.
+- [overview](https://docs.phinite.ai/assistants/overview.md)
+- [Types of Assistants](https://docs.phinite.ai/assistants/types.md): Conversational, Email, and Autonomous assistants and when to use each.
+- [CAPTURE MANIFEST](https://docs.phinite.ai/images/v2/CAPTURE_MANIFEST.md)
+- [COVERAGE MAP](https://docs.phinite.ai/images/v2/COVERAGE_MAP.md)
+- [Phinite Documentation](https://docs.phinite.ai/index.md): Design agent graphs, configure integrations, ship builds, and expose A2A agents.
+- [Email (SMTP)](https://docs.phinite.ai/integrations-hub/email.md): Send transactional and notification emails using SMTP providers.
+- [Facebook Messenger](https://docs.phinite.ai/integrations-hub/facebook-messenger.md): Send messages and manage a Facebook Messenger bot via the Messenger Platform — text, attachments, quick replies, templates, sender actions, user profile, Messenger Profile config, and handover protocol.
+- [Gmail](https://docs.phinite.ai/integrations-hub/gmail.md): Read, search, draft, send, and reply to emails...
+- [Google Meet](https://docs.phinite.ai/integrations-hub/google-meet.md): Manage Google Meet spaces, conference records, participants, recordings, and transcripts via the Google Meet REST API v2.
+- [Microsoft Teams](https://docs.phinite.ai/integrations-hub/microsoft-teams.md): Manage Microsoft Teams teams, channels, messages, chats, members, online meetings, and Planner tasks via the Microsoft Graph API.
+- [Slack](https://docs.phinite.ai/integrations-hub/slack.md): Send and manage Slack messages, reactions, channels, users, scheduled messages, and pins via the Slack Web API.
+- [Microsoft Teams (Legacy)](https://docs.phinite.ai/integrations-hub/teams.md): Send messages and approvals in Microsoft Teams, integrate Graph permissions,
+- [Telegram](https://docs.phinite.ai/integrations-hub/telegram.md): Send and receive Telegram bot messages, automate support, deliver notifications,
+- [Twilio](https://docs.phinite.ai/integrations-hub/twilio.md): Send SMS/MMS, make voice calls, manage recordings, accounts, phone numbers, conferences, and Conversations via the Twilio REST API.
+- [Voice](https://docs.phinite.ai/integrations-hub/voice.md): Voice calls and text-to-speech capabilities.
+- [Vonage](https://docs.phinite.ai/integrations-hub/vonage.md): Send SMS and multi-channel messages, run phone verification (OTP) and number insight lookups, and manage account balance and virtual numbers via the Vonage (Nexmo) APIs.
+- [WhatsApp](https://docs.phinite.ai/integrations-hub/whatsapp.md): Send WhatsApp messages (text, media, location, contacts, reactions, interactive messages, templates) and manage media via the WhatsApp Business Cloud API.
+- [Zoom](https://docs.phinite.ai/integrations-hub/zoom.md): Manage Zoom meetings, users, webinars, cloud recordings, chat channels/messages, and past-meeting participants via the Zoom REST API.
+- [Billing Dashboard](https://docs.phinite.ai/observability/billing.md): Understand costs across tokens, telephony, and infrastructure for Agent Graph workloads.
+- [Filtering & Search](https://docs.phinite.ai/observability/filtering.md): Filter metrics and logs by time, Agent Graph, environment, and attributes.
+- [Session Logs & Analysis](https://docs.phinite.ai/observability/logs.md): Analyze execution traces, decisions, and variables to debug Agent Graph runs.
+- [Decision Joints & Exceptions](https://docs.phinite.ai/observability/logs/decision-joints.md): Analyze branching decisions and exceptions in Agent Graph runs.
+- [Timeline View](https://docs.phinite.ai/observability/logs/timeline.md): Step-by-step execution trace of Agent Graph runs with timestamps and outcomes.
+- [Variable Capture Logs](https://docs.phinite.ai/observability/logs/variables.md): Inspect captured variables and data flow across Agent Graph nodes.
+- [Session Count](https://docs.phinite.ai/observability/metrics/session-count.md): Track number of sessions by Agent Graph, channel, and environment.
+- [Telephony Metrics](https://docs.phinite.ai/observability/metrics/telephony.md): Track calls, durations, and call quality for voice-enabled Agent Graph channels.
+- [Token Usage (LLM, STT, TTS)](https://docs.phinite.ai/observability/metrics/token-usage.md): Measure token consumption across language, speech-to-text, and text-to-speech for Agent Graph runs.
+- [Usage Metrics](https://docs.phinite.ai/observability/usage-metrics.md): Track sessions, token usage, and telephony metrics for Agent Graph runs.
+- [Quickstart](https://docs.phinite.ai/quickstart.md): Empty workspace to a deployable agent build.
+- [Use Phinite Docs in AI Tools](https://docs.phinite.ai/reference/ai-assistant.md): Connect Cursor, VS Code, Claude, and other MCP clients to search Phinite documentation from your editor or chat.
+- [Glossary of Terms](https://docs.phinite.ai/reference/glossary.md): Common terminology used throughout Phinite.
+- [Creating Your First Workspace](https://docs.phinite.ai/setup-account/creating-workspace.md): Set up a workspace and initial project.
+- [Signing Up for Phinite](https://docs.phinite.ai/setup-account/signing-up.md): Create your account and secure access to your workspace.
+- [Workspace overview](https://docs.phinite.ai/setup-account/workspace-overview.md)
+- [Admin Role](https://docs.phinite.ai/user-management/roles/admin.md): Capabilities and responsibilities for Admins.
+- [Developer Role](https://docs.phinite.ai/user-management/roles/developer.md): Capabilities and responsibilities for Developers.
+- [QA role](https://docs.phinite.ai/user-management/roles/tester.md): Capabilities and responsibilities for the QA workspace role (sometimes referred to as Tester).
+- [Viewer Role](https://docs.phinite.ai/user-management/roles/viewer.md): Capabilities and responsibilities for Viewers.
+- [What is Phinite](https://docs.phinite.ai/what-is-phinite.md): Agent-first platform to design, build, and deploy Conversational and Autonomous agents.
+- [Creating Your First Workspace](https://docs.phinite.ai/workspaces/creating-workspace.md): Set up a workspace and initial project.

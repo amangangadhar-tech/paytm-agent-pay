@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paytm Agent Pay</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#002E6E; --sky:#00B9F1; --page:#E9EFF5; --ink:#10233F; --muted:#5B6B82; --rule:#C9D5E3;
+    --ok:#1A9C5B; --warn:#E39B00; --danger:#D42F2A; --paper:#FFFFFF; --screen:#F2F5F9;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--page);color:var(--ink);font-family:Sora,system-ui,-apple-system,"Segoe UI",sans-serif;font-size:15px;line-height:1.45}
+  body{padding:20px 24px 32px}
+  button{font:inherit}
+  .top{display:flex;align-items:baseline;justify-content:space-between;gap:16px;max-width:1280px;margin:0 auto 16px}
+  .top h1{font-size:20px;font-weight:800;margin:0;letter-spacing:-.01em}
+  .top h1 span{color:var(--sky)}
+  .top p{margin:0;color:var(--muted);font-size:13px}
+  .top .actions{display:flex;gap:8px;align-items:center}
+  .btn{font-weight:600;font-size:13px;color:var(--navy);background:transparent;border:1.5px solid var(--navy);border-radius:999px;padding:6px 14px;cursor:pointer}
+  .btn:hover{background:var(--navy);color:#fff}
+  :focus-visible{outline:3px solid var(--sky);outline-offset:2px}
+
+  .stage{display:grid;grid-template-columns:400px 1fr;gap:32px;max-width:1280px;margin:0 auto;align-items:start}
+  @media (max-width:900px){.stage{grid-template-columns:1fr}}
+
+  /* ---------- phone ---------- */
+  .phone{width:390px;max-width:100%;height:800px;background:#0B1F3A;border-radius:46px;padding:12px;box-shadow:0 40px 70px -30px rgba(0,46,110,.6),inset 0 0 0 2px #1c355e;position:relative;margin:0 auto}
+  .screen{background:var(--screen);border-radius:36px;height:100%;overflow:hidden;display:flex;flex-direction:column;position:relative}
+  .status{position:absolute;top:0;left:0;right:0;height:44px;display:flex;justify-content:space-between;align-items:center;padding:12px 26px 0;color:#fff;font-size:12px;font-weight:600;z-index:3}
+  .status .island{position:absolute;left:50%;top:10px;transform:translateX(-50%);width:110px;height:28px;background:#0B1F3A;border-radius:999px}
+  .appbar{background:linear-gradient(160deg,#00337A 0%,var(--navy) 60%,#012457 100%);color:#fff;padding:52px 20px 16px}
+  .appbar .row{display:flex;justify-content:space-between;align-items:center}
+  .appbar .brand{font-weight:800;font-size:19px;letter-spacing:-.01em}
+  .appbar .brand b{color:var(--sky);font-weight:800}
+  .appbar .avatar{width:30px;height:30px;border-radius:50%;background:var(--sky);color:var(--navy);font-weight:800;font-size:13px;display:grid;place-items:center}
+  .appbar .bal{margin-top:12px;font-size:11px;opacity:.75}
+  .appbar .amt{font-size:26px;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:-.02em;line-height:1.1}
+  .quick{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:10px 14px 0}
+  .q{background:#fff;border-radius:12px;padding:8px 4px 6px;text-align:center;font-size:10px;color:var(--ink);border:1px solid #E3EAF2}
+  .q svg{width:20px;height:20px;display:block;margin:0 auto 4px;stroke:var(--navy);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+  /* chat */
+  .chat{flex:1;margin:10px 12px 12px;display:flex;flex-direction:column;min-height:0}
+  .chat .head{font-size:12px;color:var(--muted);padding:0 4px 6px;display:flex;justify-content:space-between;align-items:center}
+  .chat .head b{color:var(--ink);font-weight:600}
+  .chat .head .st{display:inline-flex;align-items:center;gap:5px}
+  .chat .head .st i{width:7px;height:7px;border-radius:50%;background:var(--warn);display:inline-block}
+  .chat .head .st.live i{background:var(--ok)}
+  .msgs{flex:1;overflow:auto;display:flex;flex-direction:column;gap:8px;padding:4px 2px;scroll-behavior:smooth}
+  .msg{max-width:88%;padding:9px 12px;border-radius:16px;font-size:13px;line-height:1.42;white-space:pre-wrap;word-break:break-word;animation:rowin .25s ease-out;position:relative}
+  .msg.user{align-self:flex-end;background:var(--navy);color:#fff;border-bottom-right-radius:4px}
+  .msg.bot{align-self:flex-start;background:#fff;color:var(--ink);border:1px solid #E3EAF2;border-bottom-left-radius:4px}
+  .msg.bot.err{border-color:var(--danger);color:var(--danger)}
+  .msg.typing{color:var(--muted)}
+  .msg.typing .dots{display:inline-flex;gap:3px;margin-left:6px;vertical-align:middle}
+  .msg.typing .dots i{width:5px;height:5px;border-radius:50%;background:var(--sky);animation:blink 1.2s infinite}
+  .msg.typing .dots i:nth-child(2){animation-delay:.2s}.msg.typing .dots i:nth-child(3){animation-delay:.4s}
+  @keyframes blink{0%,80%,100%{opacity:.2}40%{opacity:1}}
+  .msg .t{display:block;font-size:10px;color:var(--muted);margin-top:4px}
+  .msg.user .t{color:rgba(255,255,255,.65)}
+
+  /* rich cards */
+  .card{align-self:flex-start;width:92%;background:#fff;border:1px solid #E3EAF2;border-radius:16px;overflow:hidden;animation:rowin .3s ease-out;font-size:13px}
+  .card .ch{padding:9px 12px;font-weight:600;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .card .cb{padding:8px 12px 12px;white-space:pre-wrap;line-height:1.42}
+  .card.approve .ch{background:#EAF3FF;color:var(--navy)}
+  .card.receipt .ch{background:#E6F6EE;color:var(--ok)}
+  .card.scam .ch{background:#FDECEC;color:var(--danger)}
+  .card.info .ch{background:#F2F5F9;color:var(--ink)}
+  .card .kv{display:grid;grid-template-columns:auto 1fr;gap:3px 12px;font-size:12px;margin-top:6px}
+  .card .kv span:nth-child(odd){color:var(--muted)}
+  .card .kv b{font-variant-numeric:tabular-nums}
+  .card .big{font-size:22px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:var(--navy)}
+  .card .acts{display:flex;gap:8px;padding:0 12px 12px}
+  .card .acts button{flex:1;border-radius:10px;padding:9px 0;font-weight:600;font-size:13px;cursor:pointer;border:1.5px solid var(--navy);background:#fff;color:var(--navy)}
+  .card .acts button.primary{background:var(--navy);color:#fff}
+  .card.scam .acts button{border-color:var(--danger);color:var(--danger)}
+  .card.scam .acts button.primary{background:var(--danger);color:#fff}
+  .card .acts button:disabled{opacity:.45;cursor:default}
+  .pill{display:inline-block;font-size:11px;font-weight:600;border-radius:999px;padding:2px 8px}
+  .pill.low{background:#E6F6EE;color:var(--ok)}.pill.medium{background:#FFF4DB;color:#9A6A00}.pill.high{background:#FDECEC;color:var(--danger)}
+
+  .chips{display:flex;gap:6px;flex-wrap:nowrap;overflow-x:auto;padding:6px 2px;scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chip{flex:0 0 auto;font-size:11px;color:var(--navy);background:#fff;border:1px solid #C9D5E3;border-radius:999px;padding:4px 10px;cursor:pointer;white-space:nowrap}
+  .chip:hover{border-color:var(--navy)}
+  .compose{display:flex;gap:6px;padding-top:6px;align-items:center}
+  .compose input{flex:1;font:inherit;font-size:13px;padding:10px 12px;border:1px solid #C9D5E3;border-radius:999px;background:#fff;color:var(--ink);min-width:0}
+  .compose input:focus{outline:2px solid var(--sky);outline-offset:1px;border-color:transparent}
+  .iconbtn{width:40px;height:40px;border-radius:50%;border:0;cursor:pointer;display:grid;place-items:center;flex:0 0 auto;user-select:none;-webkit-user-select:none;touch-action:none}
+  .iconbtn svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .iconbtn.send{background:var(--sky)}
+  .iconbtn.mic{background:var(--navy)}
+  .iconbtn.mic.rec{background:var(--danger);animation:pulse 1s infinite}
+  .iconbtn.mic.off{background:#9FB3CB}
+  .iconbtn:disabled{opacity:.5;cursor:default}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(212,47,42,.5)}70%{box-shadow:0 0 0 10px rgba(212,47,42,0)}100%{box-shadow:0 0 0 0 rgba(212,47,42,0)}}
+  .listening{font-size:11px;color:var(--danger);padding:2px 4px 0;min-height:16px}
+  .callbtn{font-size:11px;font-weight:600;color:#fff;background:var(--ok);border:0;border-radius:999px;padding:4px 10px;cursor:pointer;display:inline-flex;align-items:center;gap:5px}
+  .callbtn.busy{background:var(--warn)}
+  .callbtn:disabled{opacity:.6;cursor:default}
+  .msg.call{border-left:3px solid var(--ok)}
+  .msg.call .who{display:block;font-size:10px;color:var(--ok);font-weight:600;margin-bottom:2px}
+
+  /* ---------- passbook ---------- */
+  .book{background:var(--paper);border-radius:20px;padding:24px 28px 20px;border:1px solid var(--rule)}
+  .balance{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;padding-bottom:16px;border-bottom:2px solid var(--ink)}
+  .balance .who{color:var(--muted);font-size:13px}
+  .balance .num{font-size:54px;font-weight:800;letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums;color:var(--navy);transition:color .3s}
+  .balance .num.down{color:var(--danger)}.balance .num.up{color:var(--ok)}
+  .balance .lim{text-align:right;color:var(--muted);font-size:13px;line-height:1.5}
+  .balance .lim b{color:var(--ink);font-variant-numeric:tabular-nums}
+
+  .risk{display:grid;grid-template-columns:150px 1fr;gap:18px;align-items:center;padding:16px 0;border-bottom:1px solid var(--rule)}
+  .risk h2{margin:0;font-size:14px;font-weight:600}
+  .risk .sub{color:var(--muted);font-size:12px;margin-top:2px;word-break:break-all}
+  .meter{position:relative;height:14px;border-radius:999px;background:linear-gradient(90deg,var(--ok) 0 35%,var(--warn) 35% 70%,var(--danger) 70% 100%);opacity:.9}
+  .needle{position:absolute;top:-6px;width:4px;height:26px;background:var(--ink);border-radius:2px;left:0;transform:translateX(-50%);transition:left .8s cubic-bezier(.2,.8,.2,1)}
+  .verdict{margin-top:10px;font-size:13px;font-weight:600}
+  .verdict.low{color:var(--ok)}.verdict.medium{color:var(--warn)}.verdict.high{color:var(--danger)}
+  .reasons{margin:4px 0 0;padding-left:18px;color:var(--muted);font-size:12px}
+
+  .registry{padding:14px 0;border-bottom:1px solid var(--rule)}
+  .registry h2{font-size:14px;font-weight:600;margin:0 0 8px}
+  .cards{display:flex;gap:10px;flex-wrap:wrap}
+  .acard{flex:1 1 180px;border:1px solid var(--rule);border-radius:12px;padding:10px 12px;font-size:12px;position:relative;transition:border-color .3s,box-shadow .3s}
+  .acard b{display:block;font-size:13px;padding-right:48px}
+  .acard .tags{color:var(--muted);margin-top:2px}
+  .acard .badge{position:absolute;top:10px;right:10px;font-size:10px;font-weight:600;border-radius:999px;padding:2px 7px;background:#FFF4DB;color:#9A6A00}
+  .acard .badge.live{background:#E6F6EE;color:var(--ok)}
+  .acard.active{border-color:var(--sky);box-shadow:0 0 0 3px rgba(0,185,241,.25)}
+
+  /* agent pipeline */
+  .pipe{padding:16px 0 6px;border-bottom:1px solid var(--rule)}
+  .pipe h2{font-size:14px;font-weight:600;margin:0 0 12px;display:flex;justify-content:space-between;align-items:center}
+  .pipe h2 span{font-size:11px;font-weight:400;color:var(--muted)}
+  .pstages{display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative}
+  .pstage{position:relative;padding:0 8px 0 0;min-width:0}
+  .pstage .node{display:flex;align-items:center;gap:8px;position:relative;z-index:1}
+  .pstage .ic{width:34px;height:34px;border-radius:50%;border:2px solid var(--rule);background:#fff;display:grid;place-items:center;flex:0 0 auto;transition:all .35s}
+  .pstage .ic svg{width:16px;height:16px;fill:none;stroke:var(--muted);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:stroke .35s}
+  .pstage .lb{font-size:12px;font-weight:600;color:var(--muted);transition:color .35s;white-space:nowrap;background:var(--paper);padding-right:6px}
+  .pstage .dt{font-size:11px;color:var(--muted);margin:6px 0 0 42px;line-height:1.35;min-height:30px;max-height:30px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+  .pstage::after{content:"";position:absolute;top:16px;left:34px;right:0;height:2px;background:var(--rule);z-index:0;transition:background .35s}
+  .pstage:last-child::after{display:none}
+  .pstage.active .ic{border-color:var(--sky);animation:ring 1.2s infinite}
+  .pstage.active .ic svg{stroke:var(--sky)}.pstage.active .lb{color:var(--ink)}.pstage.active .dt{color:var(--ink)}
+  .pstage.done .ic{border-color:var(--ok);background:var(--ok)}.pstage.done .ic svg{stroke:#fff}.pstage.done .lb{color:var(--ink)}
+  .pstage.done::after{background:var(--ok)}
+  .pstage.blocked .ic{border-color:var(--danger);background:var(--danger)}.pstage.blocked .ic svg{stroke:#fff}.pstage.blocked .lb{color:var(--danger)}.pstage.blocked .dt{color:var(--danger)}
+  @keyframes ring{0%{box-shadow:0 0 0 0 rgba(0,185,241,.45)}70%{box-shadow:0 0 0 8px rgba(0,185,241,0)}100%{box-shadow:0 0 0 0 rgba(0,185,241,0)}}
+  @media (max-width:1100px){.pstages{grid-template-columns:repeat(2,1fr);gap:14px}.pstage::after{display:none}}
+
+  .cols{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;padding-top:16px}
+  @media (max-width:1100px){.cols{grid-template-columns:1fr}}
+  .cols h2{font-size:14px;font-weight:600;margin:0 0 8px}
+  .ledger{list-style:none;margin:0;padding:0}
+  .ledger li{display:grid;grid-template-columns:36px 1fr auto;gap:12px;align-items:center;padding:9px 0;border-bottom:1px solid var(--rule);font-size:13px;animation:rowin .5s ease-out}
+  .ledger .av{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:14px;color:#fff;background:var(--navy)}
+  .ledger li.credit .av{background:var(--ok)}.ledger li.blocked .av{background:var(--danger)}
+  .ledger li .n{font-weight:600}
+  .ledger li .m{color:var(--muted);font-size:12px}
+  .ledger li .a{font-variant-numeric:tabular-nums;font-weight:700;text-align:right;white-space:nowrap}
+  .ledger li .a small{display:block;font-size:10px;font-weight:600;border-radius:999px;padding:1px 7px;margin-top:3px;background:#E6F6EE;color:var(--ok);text-decoration:none}
+  .ledger li .a.debit{color:var(--ink)}.ledger li .a.credit{color:var(--ok)}
+  .ledger li.blocked .n{color:var(--danger)}.ledger li.blocked .a{color:var(--muted);text-decoration:line-through}
+  .ledger li.blocked .a small{background:#FDECEC;color:var(--danger)}
+  .empty{color:var(--muted);font-size:13px;padding:10px 0}
+  .feed{list-style:none;margin:0;padding:0 0 0 18px;border-left:2px solid var(--rule);max-height:230px;overflow:auto}
+  .feed li{position:relative;padding:0 0 12px 0;font-size:13px;animation:rowin .5s ease-out}
+  .feed li::before{content:"";position:absolute;left:-24px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--sky);border:2px solid #fff;box-shadow:0 0 0 2px var(--sky)}
+  .feed li.pay::before,.feed li.approve::before,.feed li.confirm::before{background:var(--ok);box-shadow:0 0 0 2px var(--ok)}
+  .feed li.blocked::before,.feed li.report::before,.feed li.scam::before{background:var(--danger);box-shadow:0 0 0 2px var(--danger)}
+  .feed li.a2a::before{background:var(--navy);box-shadow:0 0 0 2px var(--navy)}
+  .feed li.empty{color:var(--muted)}.feed li.empty::before{display:none}
+  .feed .who{font-weight:600}.feed .t{color:var(--muted);font-size:11px;margin-left:6px}
+
+  .foot{max-width:1280px;margin:14px auto 0;color:var(--muted);font-size:12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--warn);margin-right:6px;vertical-align:middle}
+  .dot.on{background:var(--ok)}
+  @keyframes rowin{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div>
+    <h1>Paytm <span>Agent Pay</span></h1>
+    <p>Your agent finds, checks and pays other agents. You approve the money.</p>
+  </div>
+  <div class="actions">
+    <button class="btn" id="speak" type="button" aria-pressed="true">🔊 Voice replies on</button>
+    <button class="btn" id="reset" type="button">Reset demo</button>
+  </div>
+</header>
+
+<main class="stage">
+  <section class="phone" aria-label="Paytm app">
+    <div class="screen">
+      <div class="status"><span id="clock">9:41</span><span class="island"></span><span>▲ ▮ 100%</span></div>
+      <div class="appbar">
+        <div class="row"><div class="brand">pay<b>tm</b></div><div class="avatar">A</div></div>
+        <div class="bal">Paytm Wallet</div>
+        <div class="amt" id="phone-balance">₹4,250</div>
+      </div>
+      <div class="quick" aria-hidden="true">
+        <div class="q"><svg viewBox="0 0 24 24"><path d="M3 7V4h3M21 7V4h-3M3 17v3h3M21 17v3h-3M7 7h4v4H7zM13 7h4v4h-4zM7 13h4v4H7zM13 13h2v2h-2z"/></svg>Scan QR</div>
+        <div class="q"><svg viewBox="0 0 24 24"><path d="M7 4h10v16H7zM11 18h2"/></svg>To Mobile</div>
+        <div class="q"><svg viewBox="0 0 24 24"><path d="M3 10l9-6 9 6M5 10v9h14v-9M9 19v-5h6v5"/></svg>To Bank</div>
+        <div class="q"><svg viewBox="0 0 24 24"><path d="M4 6h16v12H4zM4 10h16M8 15h3"/></svg>Bills</div>
+      </div>
+
+      <div class="chat" id="chat">
+        <div class="head"><b>Agent Pay</b><span class="st" id="chat-status"><i></i><span>connecting</span></span></div>
+        <div class="msgs" id="msgs"></div>
+        <div class="listening" id="listening"></div>
+        <div class="chips" id="chips">
+          <button class="chip" type="button">Book me a cab to Koramangala, under ₹300</button>
+          <button class="chip" type="button">Send ₹100 to Rahul</button>
+          <button class="chip" type="button">Send ₹500 to Arjun</button>
+          <button class="chip" type="button">Namma Metro from Indiranagar to Majestic</button>
+          <button class="chip" type="button" data-full="Your electricity will be disconnected tonight. Pay ₹1 to update KYC at bescom-update@ybl">⚠ Electricity KYC ₹1 (scam)</button>
+          <button class="chip" type="button">What is my balance?</button>
+        </div>
+        <form class="compose" id="compose">
+          <button class="iconbtn mic" id="mic" type="button" title="Hold to talk" aria-label="Hold to talk"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button>
+          <input id="msg" type="text" placeholder="Ask Agent Pay…" autocomplete="off">
+          <button class="iconbtn send" id="send" type="submit" aria-label="Send"><svg viewBox="0 0 24 24"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></svg></button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="book" aria-label="Live account passbook">
+    <div class="balance">
+      <div><div class="who">Aman's wallet</div><div class="num" id="balance">₹4,250</div></div>
+      <div class="lim">Spent today <b id="spent">₹0</b><br>Daily limit <b id="limit">₹10,000</b></div>
+    </div>
+
+    <div class="risk" aria-live="polite">
+      <div><h2>Payee risk</h2><div class="sub" id="risk-vpa">No payee checked yet</div></div>
+      <div>
+        <div class="meter"><div class="needle" id="needle" style="left:0%"></div></div>
+        <div class="verdict" id="verdict">Waiting for the Risk Assessor</div>
+        <ul class="reasons" id="reasons"></ul>
+      </div>
+    </div>
+
+    <div class="registry">
+      <h2>Agent Registry — agents Agent Pay talks to over A2A</h2>
+      <div class="cards">
+        <div class="acard" data-key="quickcab"><b>QuickCabAgent</b><div class="tags">cab · ride · get_quote, confirm_order</div><span class="badge live">LIVE</span></div>
+        <div class="acard" data-key="medplus"><b>MedPlusPharmacyAgent</b><div class="tags">pharmacy · medicine · get_quote, confirm_order</div><span class="badge">TEST</span></div>
+        <div class="acard" data-key="nammametro"><b>Namma Metro</b><div class="tags">metro · transit · QR ticket</div><span class="badge">TOOL</span></div>
+      </div>
+    </div>
+
+    <div class="pipe">
+      <h2>Agent pipeline <span id="pipe-note">waiting for a request</span></h2>
+      <div class="pstages" id="stages">
+        <div class="pstage" data-s="you"><div class="node"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></div><div class="lb">You</div></div><div class="dt">Ask for anything</div></div>
+        <div class="pstage" data-s="find"><div class="node"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></div><div class="lb">Find &amp; quote (A2A)</div></div><div class="dt">Discovers a merchant agent</div></div>
+        <div class="pstage" data-s="risk"><div class="node"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg></div><div class="lb">Risk check</div></div><div class="dt">Scores the payee, matches scam patterns</div></div>
+        <div class="pstage" data-s="approve"><div class="node"><div class="ic"><svg viewBox="0 0 24 24"><path d="M7 11V7a5 5 0 0 1 10 0v4"/><rect x="5" y="11" width="14" height="10" rx="2"/></svg></div><div class="lb">Your approval</div></div><div class="dt">Nothing moves without YES</div></div>
+        <div class="pstage" data-s="pay"><div class="node"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h3"/></svg></div><div class="lb">Pay</div></div><div class="dt">Token-gated UPI payment</div></div>
+      </div>
+    </div>
+
+    <div class="cols">
+      <div><h2>Transactions</h2><ul class="ledger" id="ledger"></ul></div>
+      <div><h2>Recent activity</h2><ul class="feed" id="feed"><li class="empty">Nothing yet. Say something to Agent Pay.</li></ul></div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <span><span class="dot" id="live-dot"></span><span id="live-text">Connecting to sandbox</span></span>
+  <span>Sandbox API: <code id="api-base"></code></span>
+</footer>
+
+<script>
+(function () {
+  const $ = (id) => document.getElementById(id);
+  const inr = (n) => '₹' + Number(n).toLocaleString('en-IN');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  $('api-base').textContent = location.origin + '/api';
+  const tick = () => { $('clock').textContent = new Date().toLocaleTimeString('en-IN', { hour: 'numeric', minute: '2-digit' }).replace(/\s?[ap]m/i, ''); };
+  tick(); setInterval(tick, 30000);
+
+  // ---- balance
+  let shown = 0;
+  function setBalance(target, animate) {
+    const el = $('balance'), p = $('phone-balance'); target = Number(target);
+    if (!animate || reduce) { shown = target; el.textContent = p.textContent = inr(target); return; }
+    const from = shown, dir = target < from ? 'down' : 'up', start = performance.now(), dur = 900;
+    el.classList.add(dir);
+    (function step(t) {
+      const k = Math.min(1, (t - start) / dur), e = 1 - Math.pow(1 - k, 3);
+      const v = Math.round(from + (target - from) * e); el.textContent = p.textContent = inr(v);
+      if (k < 1) requestAnimationFrame(step); else { shown = target; setTimeout(() => el.classList.remove(dir), 700); }
+    })(start);
+  }
+  function setWallet(w, animate) { setBalance(w.balance, animate); $('spent').textContent = inr(w.dailySpent); $('limit').textContent = inr(w.dailyLimit); }
+
+  // ---- risk + registry highlight
+  function setRisk(r) {
+    $('risk-vpa').textContent = r.vpa; $('needle').style.left = r.score + '%';
+    const v = $('verdict'); v.className = 'verdict ' + r.level;
+    v.textContent = ({ low: 'Low risk', medium: 'Unknown payee', high: 'Likely scam' })[r.level] + ' · score ' + r.score + '/100';
+    $('reasons').innerHTML = r.reasons.map((x) => '<li>' + esc(x) + '</li>').join('');
+  }
+  function highlightCard(agent) {
+    const key = /quickcab/i.test(agent) ? 'quickcab' : /medplus/i.test(agent) ? 'medplus' : /metro/i.test(agent) ? 'nammametro' : null;
+    if (!key) return;
+    document.querySelectorAll('.acard').forEach((c) => c.classList.toggle('active', c.dataset.key === key));
+    setTimeout(() => document.querySelectorAll('.acard').forEach((c) => c.classList.remove('active')), 6000);
+  }
+
+  // ---- ledger + feed
+  function ledgerRow(t, blocked) {
+    const li = document.createElement('li'); li.className = blocked ? 'blocked' : (t.type === 'CREDIT' ? 'credit' : 'debit');
+    const when = new Date(t.ts).toLocaleString('en-IN', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
+    const title = t.note || t.payeeVpa; const initial = blocked ? '!' : ((title.replace(/^[^A-Za-z]+/, '')[0] || 'P')).toUpperCase();
+    li.innerHTML = '<div class="av">' + esc(initial) + '</div><div><div class="n">' + esc(title) + '</div><div class="m">' + esc(t.payeeVpa) + ' · ' + when + (t.txnId ? ' · ' + t.txnId : '') + '</div></div>' +
+      '<div class="a ' + (t.type === 'CREDIT' ? 'credit' : 'debit') + '">' + (blocked ? inr(t.amount) : (t.type === 'CREDIT' ? '+' : '−') + inr(t.amount)) + '<small>' + (blocked ? 'Blocked' : 'Success') + '</small></div>';
+    return li;
+  }
+
+  // ---- pipeline: map agent events onto the five stages
+  const ORDER = ['you', 'find', 'risk', 'approve', 'pay'];
+  function stageFor(e) {
+    const a = e.agent || '', d = e.detail || '';
+    if (a === 'User') return 'you';
+    if (/risk assessor|scam pattern/i.test(a)) return 'risk';
+    if (/^human$/i.test(a)) return 'approve';
+    if (/payment executor|scam guardian/i.test(a)) return 'pay';
+    if (/sandbox/i.test(a) && /refused|blocked/i.test(d)) return 'pay';
+    if (/quickcab|medplus|metro|contact|concierge|recharge|chai/i.test(a)) return 'find';
+    return null;
+  }
+  function pipeReset() {
+    document.querySelectorAll('.pstage').forEach((st) => { st.className = 'pstage'; });
+    $('pipe-note').textContent = 'waiting for a request';
+  }
+  function pipeStep(e) {
+    const key = stageFor(e); if (!key) return;
+    const idx = ORDER.indexOf(key);
+    const blocked = /blocked|refused|scam|report/i.test(e.action || '') || /scam guardian/i.test(e.agent) || (/risk assessor/i.test(e.agent) && /high risk/i.test(e.detail));
+    if (key === 'you') pipeReset();
+    document.querySelectorAll('.pstage').forEach((st) => {
+      const i = ORDER.indexOf(st.dataset.s);
+      if (i < idx) { st.classList.remove('active'); if (!st.classList.contains('blocked')) st.classList.add('done'); }
+      else if (i === idx) { st.classList.remove('done'); st.classList.toggle('blocked', blocked); st.classList.toggle('active', !blocked); st.querySelector('.dt').textContent = e.detail; }
+    });
+    if (blocked) {
+      document.querySelectorAll('.pstage').forEach((st) => { if (ORDER.indexOf(st.dataset.s) > idx) { st.className = 'pstage blocked'; st.querySelector('.dt').textContent = 'Skipped — payment refused'; } });
+      $('pipe-note').textContent = 'blocked — no money moved';
+    } else if (key === 'pay' && /paid/i.test(e.detail)) { document.querySelector('.pstage[data-s="pay"]').className = 'pstage done'; $('pipe-note').textContent = 'paid with a valid human approval token'; }
+    else $('pipe-note').textContent = e.agent + ' is working';
+  }
+  function renderLedger(list) { const ul = $('ledger'); ul.innerHTML = ''; if (!list.length) ul.innerHTML = '<li class="empty">No transactions yet.</li>'; list.forEach((t) => ul.appendChild(ledgerRow(t))); }
+  function feedItem(e) {
+    const ul = $('feed'); const first = ul.querySelector('.empty'); if (first) first.remove();
+    const li = document.createElement('li'); li.className = e.action;
+    const t = new Date(e.ts).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    li.innerHTML = '<span class="who">' + esc(e.agent) + '</span> ' + esc(e.detail) + '<span class="t">' + t + '</span>';
+    ul.prepend(li); while (ul.children.length > 40) ul.lastChild.remove();
+    highlightCard(e.agent); pipeStep(e);
+  }
+
+  async function load() {
+    const [w, l, a] = await Promise.all([fetch('/api/wallet/aman').then((r) => r.json()), fetch('/api/ledger/aman').then((r) => r.json()), fetch('/api/agent-log').then((r) => r.json())]);
+    setWallet(w, false); renderLedger(l.transactions);
+    $('feed').innerHTML = '<li class="empty">Nothing yet. Say something to Agent Pay.</li>';
+    pipeReset(); a.entries.slice().reverse().forEach(feedItem);
+    if (a.lastRisk) setRisk(a.lastRisk); else { $('risk-vpa').textContent = 'No payee checked yet'; $('needle').style.left = '0%'; $('verdict').className = 'verdict'; $('verdict').textContent = 'Waiting for the Risk Assessor'; $('reasons').innerHTML = ''; }
+  }
+
+  // ---- chat
+  const msgs = $('msgs'), input = $('msg'), sendBtn = $('send');
+  let sessionId = null, busy = false, speakOn = true;
+  const stamp = () => new Date().toLocaleTimeString('en-IN', { hour: 'numeric', minute: '2-digit' });
+  function bubble(text, cls) {
+    const d = document.createElement('div'); d.className = 'msg ' + cls;
+    if (cls.includes('typing')) d.innerHTML = '<span class="txt">' + esc(text) + '</span><span class="dots"><i></i><i></i><i></i></span>';
+    else d.innerHTML = esc(text) + '<span class="t">' + stamp() + '</span>';
+    msgs.appendChild(d); msgs.scrollTop = msgs.scrollHeight; return d;
+  }
+  function setTyping(text) { const t = msgs.querySelector('.msg.typing .txt'); if (t) t.textContent = text; }
+
+  // Turn a reply into a card when it matches a known shape; otherwise a plain bubble.
+  function render(reply) {
+    const r = reply.trim();
+    const money = (r.match(/₹\s?([\d,]+)/) || [])[1];
+    const vpa = (r.match(/[\w.\-]+@\w+/) || [])[0];
+    const level = (r.match(/\b(low|medium|high)\b/i) || [])[1];
+    const score = (r.match(/(\d{1,3})\s*\/\s*100/) || [])[1];
+    if (/reply\s+yes/i.test(r)) return card('approve', 'Approve payment', r, { money, vpa, level, score }, [['NO', 'NO', false], ['YES — Pay' + (money ? ' ₹' + money : ''), 'YES', true]]);
+    if (/txn/i.test(r) && /(✅|paid\s*₹|sent to)/i.test(r)) return card('receipt', 'Payment successful', r, { money, txn: (r.match(/Txn\s*([A-Z]\d+)/i) || [])[1], bal: (r.match(/Balance now\s*₹\s?([\d,]+)/i) || [])[1] }, []);
+    if (/NPCI-\d{4}/i.test(r)) return card('info', 'Fraud report filed', r, {}, []);
+    if (/(scam|fraud|not sending|won't send|will not send)/i.test(r) && /report/i.test(r)) return card('scam', 'Payment blocked', r, { vpa, level: 'high', score }, [['Ignore', 'no', false], ['Report to NPCI', 'yes, report it', true]]);
+    if (/cancelled/i.test(r)) return card('info', 'Cancelled', r, {}, []);
+    return bubble(r, 'bot');
+  }
+  function card(kind, title, body, d, actions) {
+    const el = document.createElement('div'); el.className = 'card ' + kind;
+    const head = '<div class="ch">' + esc(title) + (d.level ? ' <span class="pill ' + d.level.toLowerCase() + '">' + esc(d.level) + ' risk' + (d.score ? ' · ' + d.score + '/100' : '') + '</span>' : '') + '</div>';
+    let kv = '';
+    if (kind === 'approve' && d.money) kv = '<div class="big">₹' + esc(d.money) + '</div><div class="kv"><span>To</span><b>' + esc(d.vpa || '—') + '</b></div>';
+    if (kind === 'receipt') kv = '<div class="big">' + (d.money ? '₹' + esc(d.money) : 'Paid') + '</div><div class="kv">' + (d.txn ? '<span>Transaction</span><b>' + esc(d.txn) + '</b>' : '') + (d.bal ? '<span>Balance</span><b>₹' + esc(d.bal) + '</b>' : '') + '</div>';
+    if (kind === 'scam' && d.vpa) kv = '<div class="kv"><span>Payee</span><b>' + esc(d.vpa) + '</b></div>';
+    el.innerHTML = head + '<div class="cb">' + kv + (kv ? '<div style="margin-top:8px">' : '') + esc(body) + (kv ? '</div>' : '') + '</div>' +
+      (actions.length ? '<div class="acts">' + actions.map(([label, val, primary]) => '<button type="button" data-say="' + esc(val) + '"' + (primary ? ' class="primary"' : '') + '>' + esc(label) + '</button>').join('') + '</div>' : '');
+    el.querySelectorAll('button[data-say]').forEach((b) => b.addEventListener('click', () => { el.querySelectorAll('button').forEach((x) => x.disabled = true); send(b.dataset.say); }));
+    msgs.appendChild(el); msgs.scrollTop = msgs.scrollHeight; return el;
+  }
+
+  async function send(text, viaVoice) {
+    if (!text || busy) return;
+    busy = true; sendBtn.disabled = true; input.value = '';
+    bubble(text, 'user');
+    const t = bubble('Agent Pay is working', 'bot typing');
+    try {
+      const r = await fetch('/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message: text, sessionId, voice: Boolean(viaVoice) }) });
+      const d = await r.json(); if (d.sessionId) sessionId = d.sessionId;
+      t.remove();
+      if (!r.ok) bubble(d.error || 'Something went wrong talking to the agent.', 'bot err');
+      else { render(d.reply || '(no reply)'); if (viaVoice || speakOn) speak(d.reply); }
+    } catch (e) { t.remove(); bubble('Could not reach the agent: ' + e.message, 'bot err'); }
+    busy = false; sendBtn.disabled = false; input.focus();
+  }
+  $('compose').addEventListener('submit', (e) => { e.preventDefault(); send(input.value.trim()); });
+  $('chips').addEventListener('click', (e) => { if (e.target.classList.contains('chip')) send(e.target.dataset.full || e.target.textContent); });
+
+  async function startChat() {
+    msgs.innerHTML = ''; sessionId = null; if (window.speechSynthesis) speechSynthesis.cancel();
+    const st = $('chat-status'), stTxt = st.querySelector('span'); st.className = 'st'; stTxt.textContent = 'connecting';
+    try {
+      const s = await fetch('/api/chat/status').then((r) => r.json());
+      if (!s.configured) { stTxt.textContent = 'not configured'; bubble('Chat API not configured — fill sandbox/chat.config.json.', 'bot err'); return; }
+      const t = bubble('Connecting to Agent Pay', 'bot typing');
+      const r = await fetch('/api/chat/start', { method: 'POST' }); const d = await r.json(); t.remove();
+      if (!r.ok) { stTxt.textContent = 'error'; bubble(d.error || 'Could not start a session.', 'bot err'); return; }
+      sessionId = d.sessionId; st.className = 'st live'; stTxt.textContent = 'live';
+      bubble(d.greeting || "Hi Aman! I'm Agent Pay. What would you like to do?", 'bot');
+    } catch (e) { stTxt.textContent = 'offline'; bubble('Could not reach the sandbox: ' + e.message, 'bot err'); }
+  }
+
+  // ---- voice: hold the mic to talk (Web Speech API), replies read aloud
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const mic = $('mic');
+  let rec = null, recActive = false;
+  if (!SR) { mic.classList.add('off'); mic.title = 'Voice input needs Chrome or Edge'; }
+  else {
+    rec = new SR(); rec.lang = 'en-IN'; rec.interimResults = true; rec.continuous = false;
+    rec.onresult = (e) => { let s = ''; for (const r of e.results) s += r[0].transcript; $('listening').textContent = '“' + s + '”'; input.value = s; };
+    rec.onend = () => { recActive = false; mic.classList.remove('rec'); const s = input.value.trim(); $('listening').textContent = ''; if (s) send(/^(yes|yeah|yep|haan|ok|okay|confirm|go ahead)/i.test(s) ? 'YES' : /^(no|nope|cancel|stop)/i.test(s) ? 'NO' : s, true); };
+    rec.onerror = () => { recActive = false; mic.classList.remove('rec'); $('listening').textContent = 'Mic error — allow microphone access and try again'; };
+    const start = (e) => { e.preventDefault(); if (recActive || busy) return; if (window.speechSynthesis) speechSynthesis.cancel(); input.value = ''; recActive = true; mic.classList.add('rec'); $('listening').textContent = 'Listening… release to send'; try { rec.start(); } catch {} };
+    const stop = () => { if (recActive) { try { rec.stop(); } catch {} } };
+    mic.addEventListener('pointerdown', start); mic.addEventListener('pointerup', stop); mic.addEventListener('pointerleave', stop); mic.addEventListener('pointercancel', stop);
+  }
+  let voice = null;
+  function pickVoice() {
+    if (!window.speechSynthesis) return;
+    const vs = speechSynthesis.getVoices();
+    // British first (Edge: "Microsoft Ryan Online (Natural)"), then any en-GB, then Indian English, then anything English.
+    voice = vs.find((v) => /en-GB/i.test(v.lang) && /ryan|thomas|george|brian|daniel/i.test(v.name)) || vs.find((v) => /en-GB/i.test(v.lang) && /natural|online/i.test(v.name)) || vs.find((v) => /en-GB/i.test(v.lang)) || vs.find((v) => /en-IN/i.test(v.lang)) || vs.find((v) => /^en/i.test(v.lang)) || null;
+  }
+  if (window.speechSynthesis) { pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
+  function speak(text) {
+    if (!speakOn || !window.speechSynthesis || !text) return;
+    const clean = text.replace(/[✅⚠️*_#`·]/g, ' ').replace(/₹\s?/g, 'rupees ').replace(/[\w.\-]+@\w+/g, (m) => m.replace('@', ' at ')).replace(/\bTxn\b/gi, 'transaction').replace(/\(\s*\d{1,3}\s*\/\s*100\s*\)/g, '').replace(/\s+/g, ' ').slice(0, 420);
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(clean); if (voice) u.voice = voice; u.lang = voice ? voice.lang : 'en-GB'; u.rate = 1.0;
+    speechSynthesis.speak(u);
+  }
+  $('speak').addEventListener('click', () => { speakOn = !speakOn; $('speak').textContent = speakOn ? '🔊 Voice replies on' : '🔇 Voice replies off'; $('speak').setAttribute('aria-pressed', String(speakOn)); if (!speakOn && window.speechSynthesis) speechSynthesis.cancel(); });
+
+  // ---- live events
+  function connect() {
+    const es = new EventSource('/api/events');
+    es.addEventListener('hello', () => { $('live-dot').classList.add('on'); $('live-text').textContent = 'Live'; });
+    es.onerror = () => { $('live-dot').classList.remove('on'); $('live-text').textContent = 'Reconnecting'; };
+    es.addEventListener('wallet', (m) => setWallet(JSON.parse(m.data), true));
+    es.addEventListener('ledger', (m) => { const t = JSON.parse(m.data); const ul = $('ledger'); const e = ul.querySelector('.empty'); if (e) e.remove(); ul.prepend(ledgerRow(t)); });
+    es.addEventListener('risk', (m) => { const r = JSON.parse(m.data); setRisk(r); if (busy) setTyping('Risk Assessor: ' + r.vpa + ' — ' + r.level + ' (' + r.score + '/100)'); });
+    es.addEventListener('scam', (m) => { const d = JSON.parse(m.data); feedItem({ agent: 'Scam pattern', action: 'scam', detail: d.patterns.map((p) => p.name).join(', '), ts: new Date().toISOString() }); if (busy) setTyping('Scam pattern matched: ' + d.patterns[0].name); });
+    es.addEventListener('agent', (m) => { const e = JSON.parse(m.data); feedItem(e); if (busy && e.agent !== 'User') setTyping(e.agent + ': ' + e.detail); });
+    es.addEventListener('report', (m) => { const r = JSON.parse(m.data); const ul = $('ledger'); const e = ul.querySelector('.empty'); if (e) e.remove(); ul.prepend(ledgerRow({ note: 'Blocked · reported ' + r.reportId, payeeVpa: r.vpa || 'unknown', amount: 0, type: 'DEBIT', ts: r.ts }, true)); });
+    es.addEventListener('reset', () => load());
+  }
+
+  $('reset').addEventListener('click', async () => { await fetch('/api/reset', { method: 'POST' }); startChat(); });
+  load().then(connect).then(startChat);
+})();
+</script>
+</body>
+</html>

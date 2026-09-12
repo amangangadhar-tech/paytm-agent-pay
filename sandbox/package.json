@@ -1,0 +1,14 @@
+{
+  "name": "paytm-sandbox",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Mock Paytm backend + demo page for the Phinite x Paytm Agent Labs Buildathon (Paytm Agent Pay)",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test test/*.test.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

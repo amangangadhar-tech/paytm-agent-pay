@@ -1,0 +1,7 @@
+.env
+__pycache__/
+node_modules/
+notes.txt
+research/docs/images/
+sandbox/chat.config.json
+sandbox/public/index.v1.html
