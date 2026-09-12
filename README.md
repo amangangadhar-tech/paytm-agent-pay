@@ -46,6 +46,23 @@ Voice: hold the mic in the phone frame and speak; replies are read aloud.
 
 **Laptop side:** Node/Express sandbox that mocks Paytm (wallet, ledger, daily limit, payee-risk table, scam patterns, merchants with deterministic quotes, contacts) and enforces the **approval-token invariant** on `/api/pay`; a demo page with interactive approve / receipt / scam cards, live wallet, risk meter, agent pipeline, and browser voice. Phinite reaches the sandbox through a cloudflared tunnel.
 
+## The agents, in plain words
+
+Think of it as a small team with a manager. The **Master** talks to you and hands jobs to the right specialist; the **children** each do one job and hand results back. Children never talk to each other.
+
+| Agent | Role | What it does |
+|---|---|---|
+| **Concierge** (Master) | The manager | Reads what you said, picks the playbook (buy something / check a suspicious message / balance), calls the children one by one, reads what each captured, and asks *you* the "Pay ₹240? YES/NO" question. The only agent that talks to you, and the one holding the rule "no money without YES". |
+| **Intent & Slot Filler** | The listener | Turns "book me a cab to Koramangala under 300" into facts: intent = book, need = cab, location = Koramangala, budget = 300. Asks one question only if something essential is missing. |
+| **Merchant Finder** | The shopper | Picks who can serve the request (cab → QuickCab, medicine → MedPlus, metro → Namma Metro, a person's name → contacts), gets a quote, captures merchant name, UPI ID, price and quote id. Never pays. |
+| **Risk Assessor** | The fraud desk | Scores the payee 0–100 with the payee-risk and scam-pattern tools, reads the NPCI/RBI advisories (RAG) to explain why. Decides low / medium (new payee, be careful) / high (scam). |
+| **Scam Guardian** | The protector | Runs only when risk is high. Refuses the payment, explains in plain words why it's a scam, gives the safe alternative, and on your yes files the fraud report and returns the reference number. |
+| **Payment Approver** | The checkpoint | Runs only after you said YES. Calls `request_approval`, which issues a single-use token locked to that exact payee and amount. Without the token the backend refuses to pay. |
+| **Payment Executor** | The cashier | Calls `pay_upi` with the token — exactly once, exactly the approved amount. Records txn id and new balance and writes the receipt. On any mismatch it stops: nothing deducted. |
+| **Receipt & Summary** | The printer | Formats the final receipt (merchant, amount, txn id, balance, risk score). In the faster flow the Executor writes the receipt itself, so this child is mostly idle. |
+
+In one line: *the Master decides, the children each do one thing, and money can only move through the Approver → Executor pair with a token the backend checks.*
+
 ## Screenshots
 
 | | |
